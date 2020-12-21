@@ -16,15 +16,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  asyncData ({ params, error, $http }) {
-    return $http.$get('/api/users/' + params.id)
-      .then((res) => {
-        return { user: res }
-      })
-      .catch((e) => {
-        error({ statusCode: 404, message: 'User not found' })
-      })
+  data () {
+    return {
+      user: []
+    }
+  },
+  async mounted () {
+    const test = await axios.get('/api/users/' + this.$route.params.id)
+    this.user = test.data
   },
   head () {
     return {

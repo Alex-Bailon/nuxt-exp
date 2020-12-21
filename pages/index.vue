@@ -38,12 +38,16 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-  async asyncData ({ $http }) {
-    const test = await $http.$get('/api/test')
+  data () {
     return {
-      test
+      test: ''
     }
+  },
+  async mounted () {
+    const testing = await axios.get('/api/test')
+    this.test = testing.data
   }
 }
 </script>

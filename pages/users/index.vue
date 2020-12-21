@@ -20,15 +20,19 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  async asyncData ({ $http }) {
-    const data = await $http.$get('/api/users')
-    return { users: data }
+  data () {
+    return { users: [] }
   },
   head () {
     return {
       title: 'Users'
     }
+  },
+  async mounted () {
+    const test = await axios.get('api/users')
+    this.users = test.data
   }
 }
 </script>
